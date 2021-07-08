@@ -11,6 +11,11 @@
 |
 */
 
+use App\Http\Controllers\QuizController;
+
 Route::get('/', function () {
-    return view('welcome');
-});
+        return view('welcome');
+    });
+
+Route::get('/quizy','QuizController@index');
+Route::get('/quizy/{type}','QuizController@quiz');
