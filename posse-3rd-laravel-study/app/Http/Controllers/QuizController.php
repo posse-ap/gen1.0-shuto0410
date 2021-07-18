@@ -8,7 +8,7 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $data["type"] = "naiyo";
+        $data["type"] = "misenntaki";
         return view("layouts.base", $data);
     }
     public function quiz($type)
