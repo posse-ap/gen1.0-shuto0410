@@ -11,66 +11,37 @@
 
 <body>
     <div class="main">
-        <!-- ここから1問目 -->
         <div class="quiz">
-            <h1>1. この地名はなんて読む？{{$type}}</h1>
-            <img src="img/1.png">
-            <ul>
-                <li id="answerlist_1_1" name="answerlist_1" class="answerlist" onclick="check(1, 1, 2)">こうわ</li>
-                <li id="answerlist_1_2" name="answerlist_1" class="answerlist" onclick="check(1, 2, 2)">たかなわ</li>
-                <li id="answerlist_1_3" name="answerlist_1" class="answerlist" onclick="check(1, 3, 2)">たかわ</li>
-                <li id="answerbox_1" class="answerbox">
-                    <span id="answertext_1"></span><br>
-                    <span>正解は「たかなわ」です！</span>
-                </li>
-            </ul>
-        </div>
-        <!-- ここから2問目 -->
-        
-        <div class="quiz">
-            <h1>2. この地名はなんて読む？</h1>
-            <img src="img/2.png">
-            <ul>
-                <li id="answerlist_2_1" name="answerlist_2" class="answerlist" onclick="check(2, 1, 3)">かめど</li>
-                <li id="answerlist_2_2" name="answerlist_2" class="answerlist" onclick="check(2, 2, 3)">かめと</li>
-                <li id="answerlist_2_3" name="answerlist_2" class="answerlist" onclick="check(2, 3, 3)">かめいど</li>
-                <li id="answerbox_2" class="answerbox">
-                    <span id="answertext_2"></span><br>
-                    <span>正解は「かめいど」です！</span>
-                </li>
-            </ul>
-        </div>
+            <h1>{{$title->title}}</h1>
 
-        <!-- ここから3問目 -->
-        <div class="quiz">
-            <h1>3. この地名はなんて読む？</h1>
-            <img src="img/3.png">
-            <ul>
-                <li id="answerlist_3_1" name="answerlist_3" class="answerlist" onclick="check(3, 1, 1)">こうじまち</li>
-                <li id="answerlist_3_2" name="answerlist_3" class="answerlist" onclick="check(3, 2, 1)">おかとまち</li>
-                <li id="answerlist_3_3" name="answerlist_3" class="answerlist" onclick="check(3, 3, 1)">かゆまち</li>
-                <li id="answerbox_3" class="answerbox">
-                    <span id="answertext_3"></span><br>
-                    <span>正解は「こうじまち」です！</span>
-                </li>
-            </ul>
-        </div>
+            {{-- 問題を生成 --}}
+            @foreach ($questions as $question_number=>$question)
+                <h2>{{$question->sentence}}</h2>
+                <img src="/image/{{$question->img_name}}">
+                @php
+                // 乱数を生成
+                    $choice_number = array();
+                    while(count($choice_number)<$choices[$question_number]->count()){
+                        $rand = rand(0,2);
+                        if (!in_array($rand,$choice_number)){
+                            array_push($choice_number,$rand);
+                        }
+                    }
+                @endphp
+                {{-- 
+                    選択肢を生成
+                    乱数の数列番目を表示を選択肢の数表示している
 
-        <!-- ここから4問目 -->
-        <div class="quiz">
-            <h1>4. この地名はなんて読む？</h1>
-            <img src="img/4.png">
-            <ul>
-                <li id="answerlist_4_1" name="answerlist_4" class="answerlist" onclick="check(4, 1, 1)">おなりもん</li>
-                <li id="answerlist_4_2" name="answerlist_4" class="answerlist" onclick="check(4, 2, 1)">おせいもん</li>
-                <li id="answerlist_4_3" name="answerlist_4" class="answerlist" onclick="check(4, 3, 1)">おなりかど</li>
-                <li id="answerbox_4" class="answerbox">
-                    <span id="answertext_4"></span><br>
-                    <span>正解は「おなりもん」です！</span>
-                </li>
-            </ul>
-        </div>
-
+                --}}
+                <ul>
+                    @for ($i=0;$i<$choices[$question_number]->count(); $i++)
+                    <li class="answerlist" >{{$choices[$question_number][$choice_number[$i]]->choice}}</li>
+                    @endfor
+                    <li class="answerbox">
+                        <span>正解は「{{$choices[$question_number][0]->choice}}」です！</span>
+                    </li>
+                </ul>
+            @endforeach
         <script src="./quizy1.js"></script>
     </div>
 </body>
