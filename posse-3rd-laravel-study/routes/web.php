@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 Route::get('/quizy','QuizController@index');
 Route::get('/quizy/{id}','QuizController@quiz');
+Route::get('scss', function () {
+    return view('for-scss');
+});
