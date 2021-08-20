@@ -12,13 +12,11 @@
 */
 
 use App\Http\Controllers\QuizController;
-
-Route::get('/', function () {
-        return view('welcome');
-    });
-
-Route::get('/quizy','QuizController@index');
-Route::get('/quizy/{id}','QuizController@quiz');
+Route::get('/','QuizController@index');
+Route::get('/{id}','QuizController@quiz');
+Route::get('/admin','PostController@admin');
+// TODO:ここのん設定がわからない
+Route::post('/admin/posted','PostController@post');
 Route::get('scss', function () {
     return view('for-scss');
 });

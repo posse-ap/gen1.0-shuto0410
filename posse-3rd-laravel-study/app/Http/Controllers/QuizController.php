@@ -10,9 +10,9 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $data["type"] = "misenntaki";
-        return view("layouts.top", $data);
+        return view("top.index");
     }
+
     public function quiz($id)
     {
         $title_model = new Title;

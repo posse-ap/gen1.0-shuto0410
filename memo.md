@@ -84,3 +84,6 @@ Route::get('scss', function () {
 webpack.mix.jsで処理を書いた
 
 npm installして npm run watchとかで動かす
+
+インサートしてそのidを取得
+    insertGetId()
