@@ -87,3 +87,23 @@ npm installして npm run watchとかで動かす
 
 インサートしてそのidを取得
     insertGetId()
+
+ミドルウェア
+<!-- https://blog.capilano-fw.com/?p=3987#i-3 -->
+
+<!-- TODO: -->
+<!-- https://laraweb.net/practice/1396/ -->
+ミドルウェアを作っただけでは使えません。
+
+/app/Http/Kernel.php でミドルウェアを登録する必要があります。
+
+ミドルウェアを登録するポイントは3つあります。
+
+・全ての処理に共通して処理を行う場合・・・$middleware に登録します。
+
+・複数のミドルウェアをまとめて(グループ)登録する場合・・・$middlewareGroups に登録します。
+
+・単体で使うミドルウェアを登録しておく場合・・・$routeMiddleware にキーと共に登録します。
+
+## ログイン関連
+url https://knowledge.cpi.ad.jp/howto-cpi/laravel-login/

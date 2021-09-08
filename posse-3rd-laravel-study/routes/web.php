@@ -17,7 +17,11 @@ Route::get('/','SelectController@index');
 Route::get('/quiz','QuizController@index');
 Route::get('/quiz/{id}','QuizController@quiz');
 // TODO:ここの設定がわからない
-Route::post('/admin/posted','PostController@post');
+Route::get('/admin', 'AdminController@index');
 Route::get('scss', function () {
     return view('for-scss');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
