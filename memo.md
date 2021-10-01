@@ -17,6 +17,23 @@
 - comment(‘コメント内容’)
 - index(‘カラム名’)
 
+## アプデorインサート
+```
+$flight = App\Flight::updateOrCreate(
+    ['departure' => 'Oakland', 'destination' => 'San Diego'],
+    ['price' => 99]
+);
+```
+`第一引数があれば、アプデ。なかったらインサート`
+
+## キャッシュクリア
+
+```
+php artisan config:cache
+php artisan config:clear
+composer dump-autoload -o
+```
+
 # 参考url
 
 ## ログイン関連
@@ -53,6 +70,9 @@ https://laraweb.net/practice/1396/
 ・複数のミドルウェアをまとめて(グループ)登録する場合・・・$middlewareGroups に登録します。
 
 ・単体で使うミドルウェアを登録しておく場合・・・$routeMiddleware にキーと共に登録します。
+
+## ORM留意点
+https://qiita.com/henriquebremenkanp/items/cd13944b0281297217a9
 
 # コマンド一覧
 ## マイグレートしてシードを初期化
@@ -93,7 +113,11 @@ Route::get('scss', function () {
     ]);
 
 ## インサートしてそのidを取得
-    insertGetId()
+    ```
+    $id = DB::table('users')->insertGetId(
+    ['email' => 'john@example.com', 'votes' => 0]
+    );
+    ```
 
 ## モデル作成
     php artisan make:model Flight -m
