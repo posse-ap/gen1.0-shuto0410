@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    @yield('form')
+    @yield('content')
 </body>
 </html>

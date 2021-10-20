@@ -15,7 +15,7 @@
             {{-- 問題文 --}}
             <h2 class = "quiz--title">{{$question->sentence}}</h2>
             {{-- 画像 --}}
-            <img src="/image/{{$question->img_name}}">
+            <img src="/storage/images/{{$question->img_name}}">
             @php
             // 乱数を生成
                 $choice_number = array();

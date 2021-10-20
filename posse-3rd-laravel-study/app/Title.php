@@ -17,4 +17,7 @@ class Title extends Model
     public function questions(){
         return $this->hasMany(Question::class);
     }
+    public function title_update($title_id,$title){
+        $this->where('id',$title_id)->update(['title'=>$title]);
+    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,19 +13,17 @@
 |
 */
 
-use App\Http\Controllers\QuizController;
-Route::get('/','SelectController@index');
 
-Route::get('/quiz','QuizController@index');
-Route::get('/quiz/{id}','QuizController@quiz');
-// TODO:ここの設定がわからない
-Route::get('/admin', 'AdminController@index');
-Route::get('scss', function () {
-    return view('for-scss');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/admin/quiz/creation', 'AdminController@send');
 
+Route::get('/','SelectController@index');
+Route::get('/quiz','QuizController@index');
+Route::get('/quiz/{id}','QuizController@quiz');
+
+Route::group(['middleware' => 'login_check'],function () {
+    Route::get('/admin', 'Admin\AdminController@index')->name('admin');
+    // quiz
+    Route::resource('/admin/quiz', 'Admin\Quiz\QuizController');
+});

@@ -12,4 +12,8 @@ class Question extends Model
     public function choices(){
         return $this->hasMany(Choice::class);
     }
+    public function question_update($question_id,$sentence)
+    {
+        $this->where('id',$question_id)->update(['sentence'=>$sentence]);
+    }
 }

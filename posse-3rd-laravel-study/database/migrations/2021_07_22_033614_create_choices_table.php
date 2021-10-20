@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditTrueFalseOfChoicesTable extends Migration
+class CreateChoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class EditTrueFalseOfChoicesTable extends Migration
      */
     public function up()
     {
-        Schema::table('choices', function (Blueprint $table) {
-            $table->string('true_false')->change();
+        Schema::create('choices', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('question_id');
+            $table->string('choice');
+            $table->string('true_false');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class EditTrueFalseOfChoicesTable extends Migration
      */
     public function down()
     {
-        Schema::table('choices', function (Blueprint $table) {
-            $table->integer('true_false')->change();
-        });
+        Schema::dropIfExists('choices');
     }
 }

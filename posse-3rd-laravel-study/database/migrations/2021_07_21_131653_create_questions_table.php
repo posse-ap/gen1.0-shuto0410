@@ -19,6 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->text('sentence');
             $table->string('img_name');
             $table->text('commentary');
+            $table->timestamps();
         });
     }
 

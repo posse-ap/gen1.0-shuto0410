@@ -18,8 +18,8 @@ class QuizController extends Controller
     public function quiz($id)
     {
         $title_model = new Title;
-        $question_data = $title_model->with('questions.choices')->get();
-        dd($question_data);
+        $question_data = $title_model->with('questions.choices')->find($id);
+        // dd($question_data);
         return view("content.quiz.index", compact('question_data'));
     }
 }
