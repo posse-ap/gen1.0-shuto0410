@@ -18,9 +18,8 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::group(['middleware' => ['LoginCheck']], function () {
-// });
-
+Route::group(['middleware' => ['login_check']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
