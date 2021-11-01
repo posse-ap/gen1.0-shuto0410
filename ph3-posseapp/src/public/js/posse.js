@@ -2,22 +2,22 @@
 
 
 // モーダル
-$(function() {
+$(function () {
 
 
-    $('#openModal').click(function() {
+    $('#openModal').click(function () {
         $('#modalArea').fadeIn();
         return false
     });
 
 
-    $('#openModal2').click(function() {
+    $('#openModal2').click(function () {
         $('#modalArea').fadeIn();
         return false
     });
 
 
-    $('#closeModal , #modalBg').click(function() {
+    $('#closeModal , #modalBg').click(function () {
         $('#modalArea').fadeOut();
         return false
     });
@@ -38,38 +38,38 @@ $(function() {
 
 //----------------------------------ロード画面----------------------------------------
 
-$(".btn").on("click", function(){
-    document.getElementById("modal_contents").style.display ="none";
-    $(document).ajaxSend(function() {
+$(".btn").on("click", function () {
+    document.getElementById("modal_contents").style.display = "none";
+    $(document).ajaxSend(function () {
         $("#overlay").fadeIn(500);
     });
     $.ajax({
         type: 'GET',
-        success: function(data){
-            console.log(data);
+        success: function (data) {
+            // console.log(data);
         }
-    }).done(function() {
-        setTimeout(function(){
+    }).done(function () {
+        setTimeout(function () {
             $("#overlay").fadeOut(500);
-            document.getElementById("success").style.display ="block";
-        },3000);
+            document.getElementById("success").style.display = "block";
+        }, 3000);
     });
-   
+
     return false;
 });
 
 //ーーーーーーーーーーーーーーーーツイッターーーーーーーーーーーーーーー
-document.getElementById("send").addEventListener('click', function(event) {
+document.getElementById("send").addEventListener('click', function (event) {
     event.preventDefault();
     var left = Math.round(window.screen.width / 2 - 275);
     var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
-    if(document.forms.modal_form.modal_check12.checked){
+    if (document.forms.modal_form.modal_check12.checked) {
         window.open(
             "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("txtbox").value),
             null,
             "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
     }
-    
+
 });
 
 
@@ -85,24 +85,24 @@ function drawChart() {
     ];
     var df = $.Deferred();
 
-    $(function() {
+    $(function () {
         $.ajax({
-            url: 'study_time.json',
+            url: '/js/study_time.json',
             dataType: 'json',
-        }).done(function(data) {
-            console.log("success");
+        }).done(function (data) {
+            // console.log("success");
 
-            $(data).each(function() {
+            $(data).each(function () {
                 var data_item = [this.day, this.time];
                 dataArray.push(data_item);
             });
             df.resolve();
-        }).fail(function() {
-            console.log("error");
+        }).fail(function () {
+            // console.log("error");
         });
     });
 
-    df.done(function() {
+    df.done(function () {
         var chartdata = google.visualization.arrayToDataTable(dataArray);
 
         var options = {
@@ -142,32 +142,32 @@ function drawChart_2() {
     var sum_2 = 0;
     var sum_3 = 0;
 
-    $(function() {
+    $(function () {
         $.ajax({
-            url: 'study_contents.json',
+            url: '/js/study_contents.json',
             dataType: 'json',
-        }).done(function(data) {
-            console.log("success");
-            $(data).each(function() {
+        }).done(function (data) {
+            // console.log("success");
+            $(data).each(function () {
                 sum_1 = sum_1 + this.c_1;
                 sum_2 = sum_2 + this.c_2;
                 sum_3 = sum_3 + this.c_3;
             });
 
             df.resolve();
-        }).fail(function() {
-            console.log("error");
+        }).fail(function () {
+            // console.log("error");
         });
     });
 
-    df.done(function() {
+    df.done(function () {
         var chartdata_2 = google.visualization.arrayToDataTable([
             ['day', 'contents'],
             ['N予備校', sum_1],
             ['ドットインストール', sum_2],
             ['posse課題', sum_3]
         ]);
-        console.log(chartdata_2);
+        // console.log(chartdata_2);
         var options = {
             legend: 'none',
             'chartArea': { top: 0, 'width': '100%', 'height': '100%' },
@@ -198,13 +198,13 @@ function drawChart_3() {
     var sum_7 = 0;
     var sum_8 = 0;
 
-    $(function() {
+    $(function () {
         $.ajax({
-            url: 'study_language.json',
+            url: '/js/study_language.json',
             dataType: 'json',
-        }).done(function(data) {
-            console.log("success");
-            $(data).each(function() {
+        }).done(function (data) {
+            // console.log("success");
+            $(data).each(function () {
                 sum_1 = sum_1 + this.l_1;
                 sum_2 = sum_2 + this.l_2;
                 sum_3 = sum_3 + this.l_3;
@@ -216,12 +216,12 @@ function drawChart_3() {
             });
 
             df.resolve();
-        }).fail(function() {
-            console.log("error");
+        }).fail(function () {
+            // console.log("error");
         });
     });
 
-    df.done(function() {
+    df.done(function () {
         var chartdata_2 = google.visualization.arrayToDataTable([
             ['day', 'contents'],
             ['HTML', sum_1],
@@ -246,8 +246,44 @@ function drawChart_3() {
     });
 }
 
-window.onresize = function() {
+$(function () {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+    $.ajax({
+        //POST通信
+        type: "post",
+        //ここでデータの送信先URLを指定します。
+        url: "/get_data",
+        dataType: "json",
+        data: {
+            uid: 100,
+            subject: "テストタイトル",
+            from: "テストfrom",
+            body: "テストbody",
+        },
+
+    })
+        //通信が成功したとき
+        .then((res) => {
+            console.log("hoge",res);
+            document.getElementById('today_time').innerHTML = res["today_time"];
+            document.getElementById('month_time').innerHTML = res["month_time"];
+            document.getElementById('all_time').innerHTML = res["all_time"];
+        })
+        //通信が失敗したとき
+        .fail((error) => {
+            console.log(error.statusText);
+        });
+});
+
+
+
+window.onresize = function () {
     google.setOnLoadCallback(drawChart);
     google.setOnLoadCallback(drawChart_2);
     google.setOnLoadCallback(drawChart_3);
 }
+
