@@ -16,13 +16,13 @@ class StudyTimesTableSeeder extends Seeder
                 'user_id' => 1,
                 'content_id' => 1,
                 'study_time' => 1,
-                'created_at' => new DateTime()
+                'created_at' => "2021-10-31",
             ],
             [
                 'user_id' => 1,
                 'content_id' => 4,
                 'study_time' => 1,
-                'created_at' => new DateTime(),
+                'created_at' => "2021-10-31",
             ],
             [
                 'user_id' => 1,
@@ -45,6 +45,36 @@ class StudyTimesTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'content_id' => 2,
+                'study_time' => 1,
+                'created_at' => new DateTime(),
+            ],
+            [
+                'user_id' => 1,
+                'content_id' => 3,
+                'study_time' => 1,
+                'created_at' => new DateTime(),
+            ],
+            [
+                'user_id' => 1,
+                'content_id' => 5,
+                'study_time' => 1,
+                'created_at' => new DateTime(),
+            ],
+            [
+                'user_id' => 1,
+                'content_id' => 7,
+                'study_time' => 1,
+                'created_at' => new DateTime(),
+            ],
+            [
+                'user_id' => 1,
+                'content_id' => 8,
+                'study_time' => 1,
+                'created_at' => new DateTime(),
+            ],
+            [
+                'user_id' => 1,
+                'content_id' => 3,
                 'study_time' => 1,
                 'created_at' => new DateTime(),
             ],

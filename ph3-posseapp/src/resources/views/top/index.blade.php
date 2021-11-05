@@ -11,7 +11,7 @@
     <header>
         <div class="headerInner">
             <div class="headerInner_left">
-                <img class="headerInner_posse" src="img/posse.png">
+                <img class="headerInner_posse" src="/img/posseLogo.png">
                 <div class="headerInner_text">
                     <div>4th week </div>
                 </div>
@@ -30,9 +30,7 @@
                         <div class="studyTime_box_title">
                             Today
                         </div>
-                        <span class="number" id = "today_time">
-                            3
-                        </span>
+                        <span class="number" id = "today_time"></span>
                         <div class="studyTime_box_hour">
                             hour
                         </div>
@@ -41,9 +39,7 @@
                         <div class="studyTime_box_title">
                             Month
                         </div>
-                        <span class="number" id = "month_time">
-                            120
-                        </span>
+                        <span class="number" id = "month_time"></span>
                         <div class="studyTime_box_hour">
                             hour
                         </div>
@@ -52,9 +48,7 @@
                         <div class="studyTime_box_title">
                             <div>Total</div>
                         </div>
-                        <span class="number" id = "all_time">
-                            <div>1348</div>
-                        </span>
+                        <span class="number" id = "all_time"></span>
                         <div class="studyTime_box_hour">
                             <div>hour</div>
                         </div>
