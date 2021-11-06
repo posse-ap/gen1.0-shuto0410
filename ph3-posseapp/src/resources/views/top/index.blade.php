@@ -13,7 +13,7 @@
             <div class="headerInner_left">
                 <img class="headerInner_posse" src="/img/posseLogo.png">
                 <div class="headerInner_text">
-                    <div>4th week </div>
+                    <div>{{$week}}week </div>
                 </div>
             </div>
             <button id="openModal">記録・投稿</button>
@@ -55,10 +55,7 @@
                     </div>
                 </div>
                 <div class="studyTime_barGraph_Box">
-
                     <div id="bargraph"></div>
-
-                    <!-- <img class="studyTime_barGraph" src="img/glaph.png"> -->
                 </div>
             </div>
             <div class="pieChart">
@@ -67,23 +64,13 @@
                     <div class="pieChart_box_title">
                         <h2>学習言語</h2>
                     </div>
-                    <!-- <img class="pieChart_box_img" src="img/content.png"> -->
                     <div id="pieChart_language">
                     </div>
                     <div class="pieChart_box_legends">
                         <!--TODO:要素をdivで括って、classつけてpadding??  -->
-                        <span></span><span class="circle js_color"></span><span
-                            class="legend">JavaScript</span></span>
-                        <span class="circle css_color"></span><span class="legend">CSS</span>
-                        <span class="circle php_color"></span><span class="legend">PHP</span>
-                        <br>
-                        <span class="circle html_color"></span><span class="legend">HTML</span>
-                        <span class="circle laravel_color"></span><span class="legend">Laravel</span>
-                        <span class="circle sql_color"></span><span class="legend">SQL</span>
-                        <br>
-                        <span class="circle shell_color"></span><span class="legend">SHELL</span>
-                        <br>
-                        <span class="circle other_color"></span><span class="legend">情報システム基礎知識</span>
+                        @foreach ($languages as $language)    
+                            <span class="circle" style="background: {{$language->colour}};"></span><span class="legend">{{$language->name}}</span></span>
+                        @endforeach
                     </div>
                 </div>
 
@@ -95,11 +82,9 @@
                     <div id="pieChart_contents">
                     </div>
                     <div class="pieChart_box_legends">
-                        <span class="circle dotinstall_color"></span><span class="legend">ドットインストール</span>
-                        <br>
-                        <span class="circle nyobi_color"></span><span class="legend">N予備校</span>
-                        <br>
-                        <span class="circle posse_color"></span><span class="legend">POSSE課題</span>
+                        @foreach ($contents as $content)    
+                        <span class="circle" style="background: {{$content->colour}};"></span><span class="legend">{{$content->name}}</span></span>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -108,8 +93,7 @@
         <!-- モーダルエリアここから -->
         <!--TODO: ロード画面の作成 -->
         <section id="modalArea" class="modalArea">
-            <div id="modalBg" class="modalBg">
-            </div>
+            <div id="modalBg" class="modalBg"></div>
             <div class="modalWrapper">
                 <!-- 成功時の画像(display noneにしてある) -->
                 <div class="success_img" id="success">
@@ -117,7 +101,9 @@
                 </div>
 
                 <div class="modalContents" id="modal_contents">
-                    <form action="mail.php" method="post" id="modal_form">
+                    <form action="{{route('send_data')}}" method="post" id="modal_form">
+                        @csrf
+                        <input type="hidden" value="{{Auth::id()}}" name="user_id">
                         <div class="modal_top">
                             <div class="modal_top_left">
 
@@ -129,40 +115,20 @@
                                     <input name="date" type="date" />
                                 </div>
 
-                                <div class="modal_contents_text">
-                                    学習コンテンツ(複数選択可)
-                                </div>
+                                <div class="modal_contents_text">学習コンテンツ(複数選択可)</div>
                                 <!-- チェックbox -->
                                 <div class="modal_contents_choices">
-
-                                    <input id="modal_check1" value="1" type="checkbox" name="checkbox01"><label
-                                        for="modal_check1" class="checkbox01">&emsp;&emsp;N予備校</label>
-                                    <input id="modal_check2" value="2" type="checkbox" name="checkbox01"><label
-                                        for="modal_check2" class="checkbox01">&emsp;&emsp;ドットインストール</label>
-                                    <input id="modal_check3" value="3" type="checkbox" name="checkbox01"><label
-                                        for="modal_check3" class="checkbox01">&emsp;&emsp;posse課題</label>
-
-                                    <div class="modal_contents_text">
-                                        学習学習言語(複数選択可)
-                                    </div>
-
-                                    <input id="modal_check4" value="4" type="checkbox" name="checkbox01"><label
-                                        for="modal_check4" class="checkbox01">&emsp;&emsp;HTML</label>
-                                    <input id="modal_check5" value="5" type="checkbox" name="checkbox01"><label
-                                        for="modal_check5" class="checkbox01">&emsp;&emsp;CSS</label>
-                                    <input id="modal_check6" value="6" type="checkbox" name="checkbox01"><label
-                                        for="modal_check6" class="checkbox01">&emsp;&emsp;JavaScript</label>
-                                    <input id="modal_check7" value="7" type="checkbox" name="checkbox01"><label
-                                        for="modal_check7" class="checkbox01">&emsp;&emsp;PHP</label>
-                                    <input id="modal_check8" value="8" type="checkbox" name="checkbox01"><label
-                                        for="modal_check8" class="checkbox01">&emsp;&emsp;Laravel</label>
-                                    <input id="modal_check9" value="9" type="checkbox" name="checkbox01"><label
-                                        for="modal_check9" class="checkbox01">&emsp;&emsp;SQL</label>
-                                    <input id="modal_check10" value="10" type="checkbox" name="checkbox01"><label
-                                        for="modal_check10" class="checkbox01">&emsp;&emsp;SHELL</label>
-                                    <input id="modal_check11" value="11" type="checkbox" name="checkbox01"><label
-                                        for="modal_check11" class="checkbox01">&emsp;&emsp;情報基礎知識(その他)</label>
-
+                                    @foreach ($contents as $content)                                        
+                                    <input id="modal_check{{$content->id}}" value="{{$content->id}}" type="checkbox" name="checkbox01[]"><label
+                                        for="modal_check{{$content->id}}" class="checkbox01">&emsp;&emsp;{{$content->name}}</label>
+                                    @endforeach
+                                </div> 
+                                    <div class="modal_contents_text">学習学習言語(複数選択可)</div>
+                                <div class="modal_contents_choices">
+                                    @foreach ($languages as $language)                                        
+                                    <input id="modal_check{{$language->id}}" value="{{$language->id}}" type="checkbox" name="checkbox01[]"><label
+                                        for="modal_check{{$language->id}}" class="checkbox01">&emsp;&emsp;{{$language->name}}</label>
+                                    @endforeach
                                 </div>
 
                             </div>
@@ -175,15 +141,13 @@
                                 </div>
 
                                 <div class="modal_time_box">
-                                    <input type="text" size="12" class="time_box">
+                                    <input type="text" size="12" class="time_box" name = "study_time">
                                 </div>
 
                                 <div class="modal_top_right_tweetBox">
-                                    <form action="#" method="post">
                                         twitter用コメント
                                         <br>
                                         <textarea id="txtbox" name="comment" class="tweetBox"></textarea>
-                                    </form>
                                     <input id="modal_check12" value="12" type="checkbox" name="checkbox01"><label
                                         for="modal_check12" class="checkbox01">&emsp;&emsp;Twitterに自動投稿する</label>
                                 </div>
@@ -194,7 +158,7 @@
 
                         <div class="modal_bottom">
                             <div class="modal_button">
-                                <button id="send" class="btn">記録・投稿</button>
+                                <button  type="submit" class="btn">記録・投稿</button>
                             </div>
                         </div>
                     </form>
@@ -210,7 +174,7 @@
         <div class="footer">
             <div class="footer_text">
                 <label onclick="location.href='./test_2.html'" class="page_button">&lt;</label>
-                2020 10月
+                2020 11月
                 <label onclick="location.href='./test_1.html'" class="page_button">&gt;</label>
                 <button id="openModal2">記録・投稿</button>
             </div>

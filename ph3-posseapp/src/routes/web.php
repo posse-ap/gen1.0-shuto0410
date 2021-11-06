@@ -23,4 +23,5 @@ Route::group(['middleware' => ['login_check']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'Top\TopController@index')->name('top');
     Route::post('/get_data', 'Top\TopController@get_data');
+    Route::post('/send_data', 'Top\TopController@send_data')->name('send_data');
 });

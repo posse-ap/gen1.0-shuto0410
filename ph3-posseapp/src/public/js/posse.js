@@ -38,39 +38,40 @@ $(function () {
 
 //----------------------------------ロード画面----------------------------------------
 
-$(".btn").on("click", function () {
-    document.getElementById("modal_contents").style.display = "none";
-    $(document).ajaxSend(function () {
-        $("#overlay").fadeIn(500);
-    });
-    $.ajax({
-        type: 'GET',
-        success: function (data) {
-            // console.log(data);
-        }
-    }).done(function () {
-        setTimeout(function () {
-            $("#overlay").fadeOut(500);
-            document.getElementById("success").style.display = "block";
-        }, 3000);
-    });
+// $(".btn").on("click", function () {
+//     document.getElementById("modal_contents").style.display = "none";
+//     $(document).ajaxSend(function () {
+//         $("#overlay").fadeIn(500);
+//     });
+//     $.ajax({
+//         type: 'GET',
+//         url:'/send_data',
+//         success: function (data) {
+//             // console.log(data);
+//         }
+//     }).done(function () {
+//         setTimeout(function () {
+//             $("#overlay").fadeOut(500);
+//             document.getElementById("success").style.display = "block";
+//         }, 3000);
+//     });
 
-    return false;
-});
+//     return false;
+// });
 
 //ーーーーーーーーーーーーーーーーツイッターーーーーーーーーーーーーーー
-document.getElementById("send").addEventListener('click', function (event) {
-    event.preventDefault();
-    var left = Math.round(window.screen.width / 2 - 275);
-    var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
-    if (document.forms.modal_form.modal_check12.checked) {
-        window.open(
-            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("txtbox").value),
-            null,
-            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
-    }
+// document.getElementById("send").addEventListener('click', function (event) {
+//     event.preventDefault();
+//     var left = Math.round(window.screen.width / 2 - 275);
+//     var top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+//     if (document.forms.modal_form.modal_check12.checked) {
+//         window.open(
+//             "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.getElementById("txtbox").value),
+//             null,
+//             "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+//     }
 
-});
+// });
 google.charts.load('current', {'packages':['corechart']});
 
 //--------------------- こっから棒グラフ---------------------------------------
