@@ -80,7 +80,7 @@ function drawBarGraph(bar_graph) {
     var dataArray = [
         ['day', 'time']
     ];
-    for (let i = 0; i < 31; i++) {
+    for (let i = 1; i <= 31; i++) {
         dataArray.push([i,null]);
     }
     bar_graph.forEach(function(day_data){

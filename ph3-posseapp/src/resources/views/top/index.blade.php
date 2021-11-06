@@ -13,7 +13,7 @@
             <div class="headerInner_left">
                 <img class="headerInner_posse" src="/img/posseLogo.png">
                 <div class="headerInner_text">
-                    <div>{{$week}}week </div>
+                    <div>{{$week}}week ようこそ{{Auth::user()->name}}さん</div>
                 </div>
             </div>
             <button id="openModal">記録・投稿</button>
