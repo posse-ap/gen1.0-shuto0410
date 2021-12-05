@@ -1,6 +1,6 @@
 'use strict';
-
 (() => {
+  const ballCount = rand(3,5);
   function rand(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -131,7 +131,10 @@
     constructor(canvas) {
       this.canvas = canvas;
       this.ctx = this.canvas.getContext('2d');
-      this.ball = new Ball(this.canvas);
+      this.ball = new Array ;
+      for(let i = 0; i < ballCount; i++){
+        this.ball[i] = new Ball(this.canvas);
+      }
       this.paddle = new Paddle(this.canvas, this);
       this.loop();
       this.isGameOver = false;
@@ -156,10 +159,16 @@
     }
 
     update() {
-      this.ball.update();
-      this.paddle.update(this.ball);
-
-      if (this.ball.getMissedStatus()) {
+      let flag = true;
+      for(let i = 0; i < ballCount; i++){
+        this.ball[i].update();
+        this.paddle.update(this.ball[i]); 
+        console.log();
+        if (!this.ball[i].getMissedStatus()) {
+          flag = false;
+        }
+      }
+      if (flag) {
         this.isGameOver = true;
       }
     }
@@ -171,7 +180,9 @@
       }
 
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ball.draw();
+      for(let i = 0; i < ballCount; i++){
+        this.ball[i].draw();
+      }
       this.paddle.draw();
       this.drawScore();
     }
