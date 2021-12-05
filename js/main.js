@@ -163,11 +163,11 @@
       for(let i = 0; i < ballCount; i++){
         this.ball[i].update();
         this.paddle.update(this.ball[i]); 
-        console.log();
         if (!this.ball[i].getMissedStatus()) {
           flag = false;
         }
       }
+      // 全てのballが落ちていないかのチェック
       if (flag) {
         this.isGameOver = true;
       }
